@@ -3,7 +3,7 @@ This is the config file that BEST Aalborg used to sort emails from @BEST.eu.org.
 The necessity for this comes from the fact that a good handful of besties don't use the right tags when sending emails. This is especially true for the mails send to the LBGs@BEST.eu.org mailing list, even through the rules about the different tags are written on the same pages.
 
 ## Setup - Linux
-It is assumed that `imapfilter` is already install
+It is assumed that `imapfilter` and `python3` is install
 
 1. Clone this repo to you computer
 2. make a symbolic link to from `~/.imapfilter` to the clone repo
