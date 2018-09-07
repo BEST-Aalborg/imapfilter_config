@@ -7,10 +7,11 @@ It is assumed that `imapfilter` is already install
 
 1. Clone this repo to you computer
 2. make a symbolic link to from `~/.imapfilter` to the clone repo
-3. Now create the systemd file `imapfilter.service` in `~/.config/systemd/user`
-4. Enable the service my running the command `systemctl --user enable --now imapfilter.service`. You may have to run the command `systemctl --user daemon-reload`
-5. If you want to auto updates of the filter, create the systemd file `imapfilter_update.service` in `~/.config/systemd/user`
-6. Enable the service my running the command `systemctl --user enable --now imapfilter_update.service`. You may have to run the command `systemctl --user daemon-reload`
+3. added your mails login information in the file `~/.imapfilter/accounts.lua`
+4. Now create the systemd file `imapfilter.service` in `~/.config/systemd/user`
+5. Enable the service my running the command `systemctl --user enable --now imapfilter.service`. You may have to run the command `systemctl --user daemon-reload`
+6. If you want to auto updates of the filter, create the systemd file `imapfilter_update.service` in `~/.config/systemd/user`
+7. Enable the service my running the command `systemctl --user enable --now imapfilter_update.service`. You may have to run the command `systemctl --user daemon-reload`
 
 
 ### Systemd
