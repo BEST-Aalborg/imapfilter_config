@@ -59,6 +59,7 @@ function sorting(account)
             any_recipient(account.BEST, 'ita@best.eu.org') + 
             any_recipient(account.BEST, 'itc@best.eu.org') + 
             any_recipient(account.BEST, 'itid@BEST.eu.org') + 
+            any_recipient(account.BEST, 'itdept@best.eu.org') + 
             any_recipient(account.BEST, 'helpdesk-members@best.eu.org') + 
             any_recipient(account.BEST, 'it-department@best.eu.org')
     result:move_messages(account["BEST/IT"])
