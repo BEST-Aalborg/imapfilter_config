@@ -78,7 +78,7 @@ function sorting(account)
 
     --- New board
     result = any_recipient(account.BEST, 'LBGs@best.eu.org')
-    result = match_field2(account["BEST"], 'Subject', '[[]New[ ]board[]]', result)
+    result = match_field2(account["BEST"], 'Subject', '(?i)[[]New[ ]board[]]', result)
     result:move_messages(account["BEST/New_board"])
 
     --- Call
