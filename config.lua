@@ -39,6 +39,7 @@ function sorting(account)
     create_mailbox(account, 'BEST/Guests')
     create_mailbox(account, 'BEST/Coorganisers')
     create_mailbox(account, 'BEST/Participants')
+    create_mailbox(account, 'BEST/Departments')
 
     ------------------------
     ---  Sort the Mails  ---
@@ -136,6 +137,9 @@ function sorting(account)
     result = match_field2(account["BEST"], 'Subject', '^[[]Participants[]]', result)
     result:move_messages(account["BEST/Participants"])
 
+    --- Departments
+    result = any_recipient(account.BEST, 'departments@best.eu.org')
+    result:move_messages(account["BEST/Departments"])
 end
 
 
