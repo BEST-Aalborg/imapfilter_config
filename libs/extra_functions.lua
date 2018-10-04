@@ -53,8 +53,6 @@ function any_recipient(mailbox, email)
 end
 
 function create_mailbox(acc, mailbox)
-    print(acc)
-    
     if string.sub(mailbox, string.len(mailbox), -1) == "/" then
         mailbox = string.sub(mailbox, 0, -2)
     end

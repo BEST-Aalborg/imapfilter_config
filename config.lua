@@ -150,6 +150,5 @@ end
 require "accounts"
 
 for i=1, #accounts do
-    print(i)
     sorting(accounts[i])
 end
