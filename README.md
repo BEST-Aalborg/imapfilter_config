@@ -7,7 +7,7 @@ It is assumed that `imapfilter` and `python3` is install
 
 1. Clone this repo to you computer
 2. make a symbolic link to from `~/.imapfilter` to the clone repo
-3. added your mails login information in the file `~/.imapfilter/accounts.lua`
+3. added your mails login information in the file `~/.imapfilter/accounts.lua` use `accounts.lua.example` to see how it should look.
 4. Now create the systemd file `imapfilter.service` in `~/.config/systemd/user`
 5. Enable the service my running the command `systemctl --user enable --now imapfilter.service`. You may have to run the command `systemctl --user daemon-reload`
 6. If you want to auto updates of the filter, create the systemd file `imapfilter_update.service` in `~/.config/systemd/user`
@@ -21,7 +21,7 @@ It is assumed that `imapfilter` and `python3` is install
 Description=Sort of mails from BEST
 
 [Service]
-WorkingDirectory=/home/%u/.imapfilter
+WorkingDirectory=%h/.imapfilter
 ExecStart=/usr/bin/imapfilter
 Restart=always
 RestartSec=5min
@@ -36,7 +36,7 @@ WantedBy=default.target
 Description=Update config file to imapfilter from GitHub
 
 [Service]
-WorkingDirectory=/home/%u/.imapfilter
+WorkingDirectory=%h/.imapfilter
 ExecStart=/usr/bin/git pull
 Restart=always
 RestartSec=60min
