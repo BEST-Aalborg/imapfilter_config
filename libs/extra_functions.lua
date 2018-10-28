@@ -13,7 +13,7 @@ function match_field2(self, field, pattern)
 
     local set = Set()
     for mbox in pairs(_extract_mailboxes(self)) do
-        print(mbox)
+--        print(mbox)
         set = set + mbox.match_field2(mbox, field, pattern, self)
     end
     return self * set
@@ -29,17 +29,17 @@ function match_field2(self, field, pattern, messages)
     if #mesgs == 0 or fields == nil then return Set({}) end
     local results = {}
     for m, f in pairs(fields) do
-         print("---" .. m .. "---")
-         print(f)
+--         print("---" .. m .. "---")
+--         print(f)
         f = mime_decoder(f)
-         print(f)
+--         print(f)
         re = string.gsub(f, '^[^: ]*: ?(.*)$', '%1')
-         print(re)
+--         print(re)
         
         if regex_search(pattern, (re)) then
             table.insert(results, {self, m})
         end
-        print("")
+--        print("")
     end
 
     return Set(results)
@@ -57,20 +57,30 @@ function create_mailbox(acc, mailbox)
         mailbox = string.sub(mailbox, 0, -2)
     end
 
-    for i = string.len(mailbox),1,-1 do
-        if string.sub(mailbox, i, i) == '/' then
-            tmp = string.sub(mailbox, 0, i-1)
-            folders = acc:list_all(tmp, folder)
-            
+    count = 0
+    for i = 1,string.len(mailbox),1 do
+        if (i == string.len(mailbox)) or (string.sub(mailbox, i+1, i+1) == '/') then
+            tmp = mailbox
+            if i ~= string.len(mailbox) then
+                tmp = string.sub(mailbox, 0, i)
+	    end
+
+	    folders = nil
+            if (count ~= 0) then
+                folders = acc:list_all(string.sub(mailbox, 0, count), folder)
+            elseif count == 0 then
+                folders = acc:list_all(folder)
+	    end
+            count = i
+
             create = 1
             for _, f in ipairs(folders) do 
-                if f == mailbox then
+                if (f == mailbox) or (f == tmp) then
                     create = 0
                 end
             end
             if create == 1 then
                 acc:create_mailbox(mailbox)
-                break
             end
         end
     end

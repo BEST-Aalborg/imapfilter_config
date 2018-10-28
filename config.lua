@@ -17,129 +17,137 @@ require "libs/extra_functions"
 ---  Sorting  ---
 -----------------
 
-function sorting(account)
+function sorting(account, config)
+    archive = config['archive_dir']
+    if type(archive) ~= "string" then
+	archive = ""
+    elseif string.len(archive) > 0 then
+	archive = string.format("%s/", archive)
+    end
+
+    BEST_DIR = string.format("%sBEST", archive)
 
     --- Create needed folders
-    create_mailbox(account, 'BEST')
-    create_mailbox(account, 'BEST/Alumni')
-    create_mailbox(account, 'BEST/AlumniNet')
-    create_mailbox(account, 'BEST/IT')
-    create_mailbox(account, 'BEST/Valhalla')
+    create_mailbox(account, string.format("%s",              BEST_DIR))
+    create_mailbox(account, string.format("%s/Alumni",       BEST_DIR))
+    create_mailbox(account, string.format("%s/AlumniNet",    BEST_DIR))
+    create_mailbox(account, string.format("%s/IT",           BEST_DIR))
+    create_mailbox(account, string.format("%s/Valhalla",     BEST_DIR))
 
-    create_mailbox(account, 'BEST/Projects')
-    create_mailbox(account, 'BEST/New_board')
-    create_mailbox(account, 'BEST/Call')
-    create_mailbox(account, 'BEST/CE')
-    create_mailbox(account, 'BEST/Merchandise')
-    create_mailbox(account, 'BEST/Announcement')
-    create_mailbox(account, 'BEST/Misc')
-    create_mailbox(account, 'BEST/Varia')
+    create_mailbox(account, string.format("%s/Projects",     BEST_DIR))
+    create_mailbox(account, string.format("%s/New_board",    BEST_DIR))
+    create_mailbox(account, string.format("%s/Call",         BEST_DIR))
+    create_mailbox(account, string.format("%s/CE",           BEST_DIR))
+    create_mailbox(account, string.format("%s/Merchandise",  BEST_DIR))
+    create_mailbox(account, string.format("%s/Announcement", BEST_DIR))
+    create_mailbox(account, string.format("%s/Misc",         BEST_DIR))
+    create_mailbox(account, string.format("%s/Varia",        BEST_DIR))
 
-    create_mailbox(account, 'BEST/Extras')
-    create_mailbox(account, 'BEST/Guests')
-    create_mailbox(account, 'BEST/Coorganisers')
-    create_mailbox(account, 'BEST/Participants')
-    create_mailbox(account, 'BEST/Departments')
+    create_mailbox(account, string.format("%s/Extras",       BEST_DIR))
+    create_mailbox(account, string.format("%s/Guests",       BEST_DIR))
+    create_mailbox(account, string.format("%s/Coorganisers", BEST_DIR))
+    create_mailbox(account, string.format("%s/Participants", BEST_DIR))
+    create_mailbox(account, string.format("%s/Departments",  BEST_DIR))
 
     ------------------------
     ---  Sort the Mails  ---
     ------------------------
 
     --- Alumni
-    result = any_recipient(account.BEST, 'alumni@best.eu.org')
-    result:move_messages(account["BEST/Alumni"])
+    result = any_recipient(account[BEST_DIR], 'alumni@best.eu.org')
+    result:move_messages(account[string.format("%s/Alumni", BEST_DIR)])
 
     --- AlumniNet
-    result = any_recipient(account.BEST, 'alumninet@best.eu.org')
-    result:move_messages(account["BEST/AlumniNet"])
+    result = any_recipient(account[BEST_DIR], 'alumninet@best.eu.org')
+    result:move_messages(account[string.format("%s/AlumniNet", BEST_DIR)])
 
     --- IT
-    result = any_recipient(account.BEST, 'it-itdept@best.eu.org') +
-            any_recipient(account.BEST, 'itd@best.eu.org') + 
-            any_recipient(account.BEST, 'itid@best.eu.org') + 
-            any_recipient(account.BEST, 'ita@best.eu.org') + 
-            any_recipient(account.BEST, 'itc@best.eu.org') + 
-            any_recipient(account.BEST, 'itid@BEST.eu.org') + 
-            any_recipient(account.BEST, 'itdept@best.eu.org') + 
-            any_recipient(account.BEST, 'helpdesk-members@best.eu.org') + 
-            any_recipient(account.BEST, 'it-department@best.eu.org')
-    result:move_messages(account["BEST/IT"])
+    result = any_recipient(account[BEST_DIR], 'it-itdept@best.eu.org') +
+             any_recipient(account[BEST_DIR], 'itd@best.eu.org') + 
+             any_recipient(account[BEST_DIR], 'itid@best.eu.org') + 
+             any_recipient(account[BEST_DIR], 'ita@best.eu.org') + 
+             any_recipient(account[BEST_DIR], 'itc@best.eu.org') + 
+             any_recipient(account[BEST_DIR], 'itid@BEST.eu.org') + 
+             any_recipient(account[BEST_DIR], 'itdept@best.eu.org') + 
+             any_recipient(account[BEST_DIR], 'helpdesk-members@best.eu.org') + 
+             any_recipient(account[BEST_DIR], 'it-department@best.eu.org')
+    result:move_messages(account[string.format("%s/IT", BEST_DIR)])
 
     --- Valhalla (Region 08 - us)
-    result = any_recipient(account.BEST, 'region8@best.eu.org')
-    result:move_messages(account["BEST/Valhalla"])
+    result = any_recipient(account[BEST_DIR], 'region8@best.eu.org')
+    result:move_messages(account[string.format("%s/Valhalla", BEST_DIR)])
 
     --- Projects
-    result = any_recipient(account.BEST, 'LBGs-projects@best.eu.org')
-    result = match_field2(account["BEST"], 'Subject', '^[[]Projects[]]', result)
-    result:move_messages(account["BEST/Projects"])
+    result = any_recipient(account[BEST_DIR], 'LBGs-projects@best.eu.org')
+    result = match_field2(account[BEST_DIR], 'Subject', '^[[]Projects[]]', result)
+    result:move_messages(account[string.format("%s/Projects", BEST_DIR)])
 
-    result = any_recipient(account.BEST, 'projects@best.eu.org')
-    result:move_messages(account["BEST/Projects"])
+    result = any_recipient(account[BEST_DIR], 'projects@best.eu.org')
+    result:move_messages(account[string.format("%s/Projects", BEST_DIR)])
 
     --- New board
-    result = any_recipient(account.BEST, 'LBGs@best.eu.org')
-    result = match_field2(account["BEST"], 'Subject', '(?i)[[]New[ ]board[]]', result)
-    result:move_messages(account["BEST/New_board"])
+    result = any_recipient(account[BEST_DIR], 'LBGs@best.eu.org')
+    result = match_field2(account[BEST_DIR], 'Subject', '(?i)[[]New[ ]board[]]', result)
+    result:move_messages(account[string.format("%s/New_board", BEST_DIR)])
 
     --- Call
-    result = any_recipient(account.BEST, 'LBGs@best.eu.org')
-    tmp_call = match_field2(account["BEST"], 'Subject', '^[[]Call[]]', result)
+    result = any_recipient(account[BEST_DIR], 'LBGs@best.eu.org')
+    tmp_call = match_field2(account[BEST_DIR], 'Subject', '^[[]Call[]]', result)
 
-    tmp_jam = match_field2(account["BEST"], 'Subject', '(?i)(([]]| )?jam([[]| )?|[[]jam[]])', tmp_call)
-    tmp_jam:move_messages(account["BEST/Participants"])
+    tmp_jam = match_field2(account[BEST_DIR], 'Subject', '(?i)(([]]| )?jam([[]| )?|[[]jam[]])', tmp_call)
+    tmp_jam:move_messages(account[string.format("%s/Participants", BEST_DIR)])
 
     result = tmp_call - tmp_jam
-    result:move_messages(account["BEST/Call"])
+    result:move_messages(account[string.format("%s/Call", BEST_DIR)])
 
     --- Announcement
-    result = any_recipient(account.BEST, 'LBGs@best.eu.org')
-    result = match_field2(account["BEST"], 'Subject', '^[[]Announcement[]]', result)
-    result:move_messages(account["BEST/Announcement"])
+    result = any_recipient(account[BEST_DIR], 'LBGs@best.eu.org')
+    result = match_field2(account[BEST_DIR], 'Subject', '^[[]Announcement[]]', result)
+    result:move_messages(account[string.format("%s/Announcement", BEST_DIR)])
 
     --- Misc
-    result = any_recipient(account.BEST, 'LBGs@best.eu.org')
-    result = match_field2(account["BEST"], 'Subject', '^[[]Misc[]]', result)
-    result:move_messages(account["BEST/Misc"])
+    result = any_recipient(account[BEST_DIR], 'LBGs@best.eu.org')
+    result = match_field2(account[BEST_DIR], 'Subject', '^[[]Misc[]]', result)
+    result:move_messages(account[string.format("%s/Misc", BEST_DIR)])
 
     --- Merchandise
-    result = any_recipient(account.BEST, 'LBGs-local@best.eu.org')
-    result = match_field2(account["BEST"], 'Subject', '^[[]Merchandise[]]', result)
-    result:move_messages(account["BEST/Merchandise"])
+    result = any_recipient(account[BEST_DIR], 'LBGs-local@best.eu.org')
+    result = match_field2(account[BEST_DIR], 'Subject', '^[[]Merchandise[]]', result)
+    result:move_messages(account[string.format("%s/Merchandise", BEST_DIR)])
 
     --- Varia
-    result = any_recipient(account.BEST, 'LBGs-local@best.eu.org')
-    result = match_field2(account["BEST"], 'Subject', '^[[]Varia[]]', result)
-    result:move_messages(account["BEST/Varia"])
+    result = any_recipient(account[BEST_DIR], 'LBGs-local@best.eu.org')
+    result = match_field2(account[BEST_DIR], 'Subject', '^[[]Varia[]]', result)
+    result:move_messages(account[string.format("%s/Varia", BEST_DIR)])
 
     --- Cultural exchange
-    result = any_recipient(account.BEST, 'LBGs-local@best.eu.org')
-    result = match_field2(account["BEST"], 'Subject', '^[[]CE[]]', result)
-    result:move_messages(account["BEST/CE"])
+    result = any_recipient(account[BEST_DIR], 'LBGs-local@best.eu.org')
+    result = match_field2(account[BEST_DIR], 'Subject', '^[[]CE[]]', result)
+    result:move_messages(account[string.format("%s/CE", BEST_DIR)])
 
     --- Extras
-    result = any_recipient(account["BEST"], 'LBGs-local@best.eu.org')
-    result = match_field2(account["BEST"], 'Subject', '^[[]Extras[]]', result)
-    result:move_messages(account["BEST/Extras"])
+    result = any_recipient(account[BEST_DIR], 'LBGs-local@best.eu.org')
+    result = match_field2(account[BEST_DIR], 'Subject', '^[[]Extras[]]', result)
+    result:move_messages(account[string.format("%s/Extras", BEST_DIR)])
 
     --- Guests
-    result = any_recipient(account.BEST, 'LBGs-local@best.eu.org')
-    result = match_field2(account["BEST"], 'Subject', '^[[]Guests[]]', result)
-    result:move_messages(account["BEST/Guests"])
+    result = any_recipient(account[BEST_DIR], 'LBGs-local@best.eu.org')
+    result = match_field2(account[BEST_DIR], 'Subject', '^[[]Guests[]]', result)
+    result:move_messages(account[string.format("%s/Guests", BEST_DIR)])
 
     --- Coorganisers
-    result = any_recipient(account.BEST, 'LBGs-local@best.eu.org')
-    result = match_field2(account["BEST"], 'Subject', '^[[]Coorganisers[]]', result)
-    result:move_messages(account["BEST/Coorganisers"])
+    result = any_recipient(account[BEST_DIR], 'LBGs-local@best.eu.org')
+    result = match_field2(account[BEST_DIR], 'Subject', '^[[]Coorganisers[]]', result)
+    result:move_messages(account[string.format("%s/Coorganisers", BEST_DIR)])
 
     --- Participants
-    result = any_recipient(account.BEST, 'LBGs-local@best.eu.org')
-    result = match_field2(account["BEST"], 'Subject', '^[[]Participants[]]', result)
-    result:move_messages(account["BEST/Participants"])
+    result = any_recipient(account[BEST_DIR], 'LBGs-local@best.eu.org')
+    result = match_field2(account[BEST_DIR], 'Subject', '^[[]Participants[]]', result)
+    result:move_messages(account[string.format("%s/Participants", BEST_DIR)])
 
     --- Departments
-    result = any_recipient(account.BEST, 'departments@best.eu.org')
-    result:move_messages(account["BEST/Departments"])
+    result = any_recipient(account[BEST_DIR], 'departments@best.eu.org')
+    result:move_messages(account[string.format("%s/Departments", BEST_DIR)])
 end
 
 
@@ -150,5 +158,5 @@ end
 require "accounts"
 
 for i=1, #accounts do
-    sorting(accounts[i])
+    sorting(accounts[i]["imap"], accounts[i]["config"])
 end
