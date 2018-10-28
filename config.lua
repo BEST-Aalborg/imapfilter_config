@@ -53,30 +53,6 @@ function sorting(account, config)
     ---  Sort the Mails  ---
     ------------------------
 
-    --- Alumni
-    result = any_recipient(account[BEST_DIR], 'alumni@best.eu.org')
-    result:move_messages(account[string.format("%s/Alumni", BEST_DIR)])
-
-    --- AlumniNet
-    result = any_recipient(account[BEST_DIR], 'alumninet@best.eu.org')
-    result:move_messages(account[string.format("%s/AlumniNet", BEST_DIR)])
-
-    --- IT
-    result = any_recipient(account[BEST_DIR], 'it-itdept@best.eu.org') +
-             any_recipient(account[BEST_DIR], 'itd@best.eu.org') + 
-             any_recipient(account[BEST_DIR], 'itid@best.eu.org') + 
-             any_recipient(account[BEST_DIR], 'ita@best.eu.org') + 
-             any_recipient(account[BEST_DIR], 'itc@best.eu.org') + 
-             any_recipient(account[BEST_DIR], 'itid@BEST.eu.org') + 
-             any_recipient(account[BEST_DIR], 'itdept@best.eu.org') + 
-             any_recipient(account[BEST_DIR], 'helpdesk-members@best.eu.org') + 
-             any_recipient(account[BEST_DIR], 'it-department@best.eu.org')
-    result:move_messages(account[string.format("%s/IT", BEST_DIR)])
-
-    --- Valhalla (Region 08 - us)
-    result = any_recipient(account[BEST_DIR], 'region8@best.eu.org')
-    result:move_messages(account[string.format("%s/Valhalla", BEST_DIR)])
-
     --- Projects
     result = any_recipient(account[BEST_DIR], 'LBGs-projects@best.eu.org')
     result = match_field2(account[BEST_DIR], 'Subject', '^[[]Projects[]]', result)
@@ -148,6 +124,30 @@ function sorting(account, config)
     --- Departments
     result = any_recipient(account[BEST_DIR], 'departments@best.eu.org')
     result:move_messages(account[string.format("%s/Departments", BEST_DIR)])
+
+    --- Alumni
+    result = any_recipient(account[BEST_DIR], 'alumni@best.eu.org')
+    result:move_messages(account[string.format("%s/Alumni", BEST_DIR)])
+
+    --- AlumniNet
+    result = any_recipient(account[BEST_DIR], 'alumninet@best.eu.org')
+    result:move_messages(account[string.format("%s/AlumniNet", BEST_DIR)])
+
+    --- IT
+    result = any_recipient(account[BEST_DIR], 'it-itdept@best.eu.org') +
+             any_recipient(account[BEST_DIR], 'itd@best.eu.org') + 
+             any_recipient(account[BEST_DIR], 'itid@best.eu.org') + 
+             any_recipient(account[BEST_DIR], 'ita@best.eu.org') + 
+             any_recipient(account[BEST_DIR], 'itc@best.eu.org') + 
+             any_recipient(account[BEST_DIR], 'itid@BEST.eu.org') + 
+             any_recipient(account[BEST_DIR], 'itdept@best.eu.org') + 
+             any_recipient(account[BEST_DIR], 'helpdesk-members@best.eu.org') + 
+             any_recipient(account[BEST_DIR], 'it-department@best.eu.org')
+    result:move_messages(account[string.format("%s/IT", BEST_DIR)])
+
+    --- Valhalla (Region 08 - us)
+    result = any_recipient(account[BEST_DIR], 'region8@best.eu.org')
+    result:move_messages(account[string.format("%s/Valhalla", BEST_DIR)])
 end
 
 
