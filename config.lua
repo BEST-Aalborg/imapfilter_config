@@ -48,6 +48,7 @@ function sorting(account, config)
     create_mailbox(account, string.format("%s/Coorganisers", BEST_DIR))
     create_mailbox(account, string.format("%s/Participants", BEST_DIR))
     create_mailbox(account, string.format("%s/Departments",  BEST_DIR))
+    create_mailbox(account, string.format("%s/RegionalAdvisers",  BEST_DIR))
 
     ------------------------
     ---  Sort the Mails  ---
@@ -143,12 +144,18 @@ function sorting(account, config)
              any_recipient(account[BEST_DIR], 'itdept@best.eu.org') + 
              any_recipient(account[BEST_DIR], 'it-id@best.eu.org') + 
              any_recipient(account[BEST_DIR], 'helpdesk-members@best.eu.org') + 
-             any_recipient(account[BEST_DIR], 'it-department@best.eu.org')
+             any_recipient(account[BEST_DIR], 'it-department@best.eu.org') +
+             any_recipient(account[BEST_DIR], 'it-observers@best.eu.org')
     result:move_messages(account[string.format("%s/IT", BEST_DIR)])
 
     --- Valhalla (Region 08 - us)
-    result = any_recipient(account[BEST_DIR], 'region8@best.eu.org')
+    result = any_recipient(account[BEST_DIR], 'region8@best.eu.org') +
+             any_recipient(account[BEST_DIR], 'region08@best.eu.org')
     result:move_messages(account[string.format("%s/Valhalla", BEST_DIR)])
+
+    --- Regional Advisers
+    result = any_recipient(account[BEST_DIR], 'regionaladvisers@best.eu.org')
+    result:move_messages(account[string.format("%s/RegionalAdvisers", BEST_DIR)])
 end
 
 
