@@ -27,28 +27,33 @@ function sorting(account, config)
 
     BEST_DIR = string.format("%sBEST", archive)
 
+    --- List of needed folders
+    NEEDED_FOLDERS = {
+        "%s",
+        "%s/Alumni",
+        "%s/AlumniNet",
+        "%s/IT",
+        "%s/Valhalla",
+        "%s/New_board",
+        "%s/Call",
+        "%s/CE",
+        "%s/Merchandise",
+        "%s/Announcement",
+        "%s/Misc",
+        "%s/Varia",
+        "%s/Extras",
+        "%s/Guests",
+        "%s/Coorganisers",
+        "%s/Participants",
+        "%s/Departments",
+        "%s/RegionalAdvisers",
+    }
+
     --- Create needed folders
-    create_mailbox(account, string.format("%s",              BEST_DIR))
-    create_mailbox(account, string.format("%s/Alumni",       BEST_DIR))
-    create_mailbox(account, string.format("%s/AlumniNet",    BEST_DIR))
-    create_mailbox(account, string.format("%s/IT",           BEST_DIR))
-    create_mailbox(account, string.format("%s/Valhalla",     BEST_DIR))
+    for _, folder in ipairs(NEEDED_FOLDERS) do
+        create_mailbox(account, string.format(folder, BEST_DIR))
+    end
 
-    create_mailbox(account, string.format("%s/Projects",     BEST_DIR))
-    create_mailbox(account, string.format("%s/New_board",    BEST_DIR))
-    create_mailbox(account, string.format("%s/Call",         BEST_DIR))
-    create_mailbox(account, string.format("%s/CE",           BEST_DIR))
-    create_mailbox(account, string.format("%s/Merchandise",  BEST_DIR))
-    create_mailbox(account, string.format("%s/Announcement", BEST_DIR))
-    create_mailbox(account, string.format("%s/Misc",         BEST_DIR))
-    create_mailbox(account, string.format("%s/Varia",        BEST_DIR))
-
-    create_mailbox(account, string.format("%s/Extras",       BEST_DIR))
-    create_mailbox(account, string.format("%s/Guests",       BEST_DIR))
-    create_mailbox(account, string.format("%s/Coorganisers", BEST_DIR))
-    create_mailbox(account, string.format("%s/Participants", BEST_DIR))
-    create_mailbox(account, string.format("%s/Departments",  BEST_DIR))
-    create_mailbox(account, string.format("%s/RegionalAdvisers",  BEST_DIR))
 
     ------------------------
     ---  Sort the Mails  ---
@@ -156,6 +161,17 @@ function sorting(account, config)
     --- Regional Advisers
     result = any_recipient(account[BEST_DIR], 'regionaladvisers@best.eu.org')
     result:move_messages(account[string.format("%s/RegionalAdvisers", BEST_DIR)])
+
+
+    ------------------------------
+    ---  Mark folders as read  ---
+    ------------------------------
+    if config['mark_folders_as_read'] ~= nil then
+        for _, folder in ipairs(config['mark_folders_as_read']) do
+            result = account[string.format("%s/%s", BEST_DIR, folder)]:is_unseen()
+            result:mark_seen()
+        end
+    end
 end
 
 

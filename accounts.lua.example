@@ -8,6 +8,8 @@ accounts = {
         },
         config = {
             archive_dir = 'Archive',
+            mark_folders_as_read = {
+            },
         }
     },
     {
@@ -19,6 +21,8 @@ accounts = {
         },
         config = {
             archive_dir = 'somewhere',
+            mark_folders_as_read = {
+            },
         }
     },
     {
@@ -30,6 +34,8 @@ accounts = {
         },
         config = {
             archive_dir = '',
+            mark_folders_as_read = {
+            },
         }
     },
 }
