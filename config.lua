@@ -47,6 +47,7 @@ function sorting(account, config)
         "%s/Participants",
         "%s/Departments",
         "%s/RegionalAdvisers",
+        "%s/Regionals",
     }
 
     --- Create needed folders
@@ -161,6 +162,10 @@ function sorting(account, config)
     --- Regional Advisers
     result = any_recipient(account[BEST_DIR], 'regionaladvisers@best.eu.org')
     result:move_messages(account[string.format("%s/RegionalAdvisers", BEST_DIR)])
+
+    --- Regionals
+    result = any_recipient(account[BEST_DIR], 'regions@best.eu.org')
+    result:move_messages(account[string.format("%s/Regionals", BEST_DIR)])
 
 
     ------------------------------
