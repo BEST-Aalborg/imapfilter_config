@@ -151,6 +151,7 @@ function sorting(account, config)
              any_recipient(account[BEST_DIR], 'it-id@best.eu.org') + 
              any_recipient(account[BEST_DIR], 'helpdesk-members@best.eu.org') + 
              any_recipient(account[BEST_DIR], 'it-department@best.eu.org') +
+             any_recipient(account[BEST_DIR], 'it-department@best-eu.org') +
              any_recipient(account[BEST_DIR], 'it-observers@best.eu.org')
     result:move_messages(account[string.format("%s/IT", BEST_DIR)])
 
