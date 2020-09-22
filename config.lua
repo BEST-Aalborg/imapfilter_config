@@ -142,17 +142,27 @@ function sorting(account, config)
 
     --- IT
     result = any_recipient(account[BEST_DIR], 'it-itdept@best.eu.org') +
-             any_recipient(account[BEST_DIR], 'itd@best.eu.org') + 
-             any_recipient(account[BEST_DIR], 'itid@best.eu.org') + 
-             any_recipient(account[BEST_DIR], 'ita@best.eu.org') + 
-             any_recipient(account[BEST_DIR], 'itc@best.eu.org') + 
-             any_recipient(account[BEST_DIR], 'itid@BEST.eu.org') + 
-             any_recipient(account[BEST_DIR], 'itdept@best.eu.org') + 
-             any_recipient(account[BEST_DIR], 'it-id@best.eu.org') + 
-             any_recipient(account[BEST_DIR], 'helpdesk-members@best.eu.org') + 
+             any_recipient(account[BEST_DIR], 'it-itdept@best-eu.org') +
+             any_recipient(account[BEST_DIR], 'itd@best.eu.org') +
+             any_recipient(account[BEST_DIR], 'itd@best-eu.org') +
+             any_recipient(account[BEST_DIR], 'itid@best.eu.org') +
+             any_recipient(account[BEST_DIR], 'itid@best-eu.org') +
+             any_recipient(account[BEST_DIR], 'ita@best.eu.org') +
+             any_recipient(account[BEST_DIR], 'ita@best-eu.org') +
+             any_recipient(account[BEST_DIR], 'itc@best.eu.org') +
+             any_recipient(account[BEST_DIR], 'itc@best-eu.org') +
+             any_recipient(account[BEST_DIR], 'itid@BEST.eu.org') +
+             any_recipient(account[BEST_DIR], 'itid@BEST.eu.org') +
+             any_recipient(account[BEST_DIR], 'itdept@best.eu.org') +
+             any_recipient(account[BEST_DIR], 'itdept@best-eu.org') +
+             any_recipient(account[BEST_DIR], 'it-id@best.eu.org') +
+             any_recipient(account[BEST_DIR], 'it-id@best-eu.org') +
+             any_recipient(account[BEST_DIR], 'helpdesk-members@best.eu.org') +
+             any_recipient(account[BEST_DIR], 'helpdesk-members@best-eu.org') +
              any_recipient(account[BEST_DIR], 'it-department@best.eu.org') +
              any_recipient(account[BEST_DIR], 'it-department@best-eu.org') +
-             any_recipient(account[BEST_DIR], 'it-observers@best.eu.org')
+             any_recipient(account[BEST_DIR], 'it-observers@best.eu.org') +
+             any_recipient(account[BEST_DIR], 'it-observers@best-eu.org')
     result:move_messages(account[string.format("%s/IT", BEST_DIR)])
 
     --- Valhalla (Region 08 - us)
