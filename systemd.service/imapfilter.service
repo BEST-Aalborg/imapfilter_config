@@ -1,0 +1,15 @@
+[Unit]
+Description=Sort BEST Aalborg's mails
+
+[Service]
+WorkingDirectory=%h/.imapfilter
+
+ExecStart=/usr/bin/imapfilter
+
+Restart=always
+RestartSec=5minutes
+RuntimeMaxSec=2hours
+
+[Install]
+WantedBy=default.target
+
