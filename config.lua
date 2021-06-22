@@ -33,6 +33,7 @@ function sorting(account, config)
         "%s/Alumni",
         "%s/AlumniNet",
         "%s/IT",
+        "%s/IT - Local",
         "%s/Valhalla",
         "%s/New_board",
         "%s/Call",
@@ -48,6 +49,8 @@ function sorting(account, config)
         "%s/Departments",
         "%s/RegionalAdvisers",
         "%s/Regionals",
+        "%s/Design",
+	"%s/Presidents",
     }
 
     --- Create needed folders
@@ -61,7 +64,9 @@ function sorting(account, config)
     ------------------------
 
     --- Projects
-    result = any_recipient(account[BEST_DIR], 'LBGs-projects@best.eu.org') +
+    result = any_recipient(account[BEST_DIR], 'LBGs@best.eu.org') +
+             any_recipient(account[BEST_DIR], 'LBGs@best-eu.org') +
+             any_recipient(account[BEST_DIR], 'LBGs-projects@best.eu.org') +
              any_recipient(account[BEST_DIR], 'LBGs-projects@best-eu.org')
     result = match_field2(account[BEST_DIR], 'Subject', '^[[]Projects[]]', result)
     result:move_messages(account[string.format("%s/Projects", BEST_DIR)])
@@ -120,7 +125,7 @@ function sorting(account, config)
     --- Extras
     result = any_recipient(account[BEST_DIR], 'LBGs-local@best.eu.org') +
              any_recipient(account[BEST_DIR], 'LBGs-local@best-eu.org')
-    result = match_field2(account[BEST_DIR], 'Subject', '^[[]Extras[]]', result)
+    result = match_field2(account[BEST_DIR], 'Subject', '(?i)^[[]Extras[]]', result)
     result:move_messages(account[string.format("%s/Extras", BEST_DIR)])
 
     --- Guests
@@ -137,13 +142,19 @@ function sorting(account, config)
 
     --- Participants
     result = any_recipient(account[BEST_DIR], 'LBGs-local@best.eu.org') +
-             any_recipient(account[BEST_DIR], 'LBGs-local@best-eu.org')
+             any_recipient(account[BEST_DIR], 'LBGs-local@best-eu.org') +
+             any_recipient(account[BEST_DIR], 'LBGs@best.eu.org') +
+             any_recipient(account[BEST_DIR], 'LBGs@best-eu.org')
     result = match_field2(account[BEST_DIR], 'Subject', '^[[]Participants[]]', result)
     result:move_messages(account[string.format("%s/Participants", BEST_DIR)])
 
     --- Departments
     result = any_recipient(account[BEST_DIR], 'departments@best.eu.org') +
-             any_recipient(account[BEST_DIR], 'departments@best-eu.org')
+             any_recipient(account[BEST_DIR], 'departments@best-eu.org') +
+             any_recipient(account[BEST_DIR], 'grants.department@best.eu.org') +
+             any_recipient(account[BEST_DIR], 'grants.department@best-eu.org') +
+             any_recipient(account[BEST_DIR], 'grantsdepartment-observers@best.eu.org') +
+             any_recipient(account[BEST_DIR], 'grantsdepartment-observers@best-eu.org')
     result:move_messages(account[string.format("%s/Departments", BEST_DIR)])
 
     --- Alumni
@@ -181,6 +192,23 @@ function sorting(account, config)
              any_recipient(account[BEST_DIR], 'it-observers@best-eu.org')
     result:move_messages(account[string.format("%s/IT", BEST_DIR)])
 
+    --- IT - Local
+    result = any_recipient(account[BEST_DIR], 'local-it@best.eu.org') +
+             any_recipient(account[BEST_DIR], 'local-it@best-eu.org')
+    result:move_messages(account[string.format("%s/IT - Local", BEST_DIR)])
+
+    --- Design
+    result = any_recipient(account[BEST_DIR], 'design@best.eu.org') +
+             any_recipient(account[BEST_DIR], 'design@best-eu.org') +
+             any_recipient(account[BEST_DIR], 'local-design@best.eu.org') +
+             any_recipient(account[BEST_DIR], 'local-design@best-eu.org')
+    result:move_messages(account[string.format("%s/Design", BEST_DIR)])
+
+    --- Presidents
+    result = any_recipient(account[BEST_DIR], 'presidents@best-eu.org') +
+             any_recipient(account[BEST_DIR], 'presidents@best-eu.org')
+    result:move_messages(account[string.format("%s/Presidents", BEST_DIR)])
+
     --- Valhalla (Region 08 - us)
     result = any_recipient(account[BEST_DIR], 'region8@best.eu.org') +
              any_recipient(account[BEST_DIR], 'region8@best-eu.org') +
@@ -198,6 +226,10 @@ function sorting(account, config)
              any_recipient(account[BEST_DIR], 'regions@best-eu.org')
     result:move_messages(account[string.format("%s/Regionals", BEST_DIR)])
 
+    --- Anything from BAN
+    result = account[BEST_DIR]:is_unseen()
+    result = match_field2(account[BEST_DIR], 'From', '@bestalumni[.]net', result)
+    result:move_messages(account[string.format("%s/Alumni", BEST_DIR)])
 
     ------------------------------
     ---  Mark folders as read  ---

@@ -29,8 +29,8 @@ function match_field2(self, field, pattern, messages)
     if #mesgs == 0 or fields == nil then return Set({}) end
     local results = {}
     for m, f in pairs(fields) do
---         print("---" .. m .. "---")
---         print(f)
+--        print("---" .. m .. "---")
+--        print(f)
         f = mime_decoder(f)
 --         print(f)
         re = string.gsub(f, '^[^: ]*: ?(.*)$', '%1')
